@@ -9,3 +9,5 @@ int main(int argc, char *argv[])
     w.show();
     return QCoreApplication::exec();
 }
+
+// Não bulir aqui por enquanto
