@@ -17,6 +17,11 @@ public:
     void run();         //função a ser executada pela thread
 
 
+    std::atomic<int> velocidade{0};
+
+public slots:
+    void updateVelocidade(int valorSlider);
+
     //Cria um sinal
 signals:
     void updateGUI(int,int,int);
@@ -26,7 +31,6 @@ private:
     int x;           //posição X do trem na tela
     int y;           //posição Y do trem na tela
     int ID;          //ID do trem
-    int velocidade;  //Velocidade. É o tempo de dormir em milisegundos entre a mudança de posição do trem
 };
 
 #endif // TREM_H

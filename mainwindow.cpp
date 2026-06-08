@@ -9,11 +9,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Cria o trem com seu (ID, posição X, posição Y)
     trem1 = new Trem(1,60,164);
+
     trem2 = new Trem(2,466,30);
     trem3 = new Trem(3, 738, 30);
     trem4 = new Trem(4, 738, 560);
     trem5 = new Trem(5, 466, 560);
     trem6 = new Trem(6, 60, 428);
+
+    connect(ui->sliderTrem1, SIGNAL(valueChanged(int)), trem1, SLOT(updateVelocidade(int)));
+    connect(ui->sliderTrem2, SIGNAL(valueChanged(int)), trem2, SLOT(updateVelocidade(int)));
+    connect(ui->sliderTrem3, SIGNAL(valueChanged(int)), trem3, SLOT(updateVelocidade(int)));
+    connect(ui->sliderTrem4, SIGNAL(valueChanged(int)), trem4, SLOT(updateVelocidade(int)));
+    connect(ui->sliderTrem5, SIGNAL(valueChanged(int)), trem5, SLOT(updateVelocidade(int)));
+    connect(ui->sliderTrem6, SIGNAL(valueChanged(int)), trem6, SLOT(updateVelocidade(int)));
 
     /*
      * Conecta o sinal UPDATEGUI à função UPDATEINTERFACE.
@@ -28,6 +36,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(trem4, SIGNAL(updateGUI(int, int, int)),SLOT(updateInterface(int, int, int)));
     connect(trem5, SIGNAL(updateGUI(int, int, int)),SLOT(updateInterface(int, int, int)));
     connect(trem6, SIGNAL(updateGUI(int, int, int)),SLOT(updateInterface(int, int, int)));
+
+
+
 
 
 
