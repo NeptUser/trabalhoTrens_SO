@@ -37,8 +37,8 @@ Thumbs.db
 **/.qmlls.ini
 
 # qtcreator generated files
-*.pro.user*
-*.qbs.user*
+#*.pro.user*
+#*.qbs.user*
 CMakeLists.txt.user*
 
 # xemacs temporary files
