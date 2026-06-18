@@ -1,4 +1,4 @@
-// Traffic colision avoidance system
+// Traffic Collision Avoidance System (TCAS)
 #ifndef TCAS_H
 #define TCAS_H
 
@@ -7,8 +7,7 @@
 class TCAS
 {
 public:
-    //TCAS();
-
+    // Mutex para as 9 regiões críticas definidas
     QMutex pontosCriticos[9];
 };
 

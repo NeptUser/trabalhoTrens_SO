@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //Cria o trem com seu (ID, posição X, posição Y)
+    //Cria o trem com seu (ID, posição X, posição Y, referência ao TCAS)
     trem1 = new Trem(1,60,164, &controladorDeRotas);
     trem2 = new Trem(2,466,30, &controladorDeRotas);
     trem3 = new Trem(3, 738, 30, &controladorDeRotas);
@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     trem5 = new Trem(5, 466, 560, &controladorDeRotas);
     trem6 = new Trem(6, 60, 428, &controladorDeRotas);
 
+    // inicia a execução das threads
     trem1->start();
     trem2->start();
     trem3->start();
@@ -22,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     trem5->start();
     trem6->start();
 
+    // Conecta o sinal valueChanged ao slot update velocidade (conecta o slider à variável)
     connect(ui->sliderTrem1, SIGNAL(valueChanged(int)), trem1, SLOT(updateVelocidade(int)));
     connect(ui->sliderTrem2, SIGNAL(valueChanged(int)), trem2, SLOT(updateVelocidade(int)));
     connect(ui->sliderTrem3, SIGNAL(valueChanged(int)), trem3, SLOT(updateVelocidade(int)));
@@ -36,13 +38,12 @@ MainWindow::MainWindow(QWidget *parent) :
      * Trem1 e Trem2 são os objetos que podem chamar o sinal. Se um outro objeto chamar o
      * sinal UPDATEGUI, não haverá execução da função UPDATEINTERFACE
      */
-    connect(trem1,SIGNAL(updateGUI(int,int,int)),SLOT(updateInterface(int,int,int)));
-    connect(trem2,SIGNAL(updateGUI(int,int,int)),SLOT(updateInterface(int,int,int)));
-
-    connect(trem3, SIGNAL(updateGUI(int, int, int)),SLOT(updateInterface(int, int, int)));
-    connect(trem4, SIGNAL(updateGUI(int, int, int)),SLOT(updateInterface(int, int, int)));
-    connect(trem5, SIGNAL(updateGUI(int, int, int)),SLOT(updateInterface(int, int, int)));
-    connect(trem6, SIGNAL(updateGUI(int, int, int)),SLOT(updateInterface(int, int, int)));
+    connect(trem1, SIGNAL(updateGUI(int, int, int)), SLOT(updateInterface(int, int, int)));
+    connect(trem2, SIGNAL(updateGUI(int, int, int)), SLOT(updateInterface(int, int, int)));
+    connect(trem3, SIGNAL(updateGUI(int, int, int)), SLOT(updateInterface(int, int, int)));
+    connect(trem4, SIGNAL(updateGUI(int, int, int)), SLOT(updateInterface(int, int, int)));
+    connect(trem5, SIGNAL(updateGUI(int, int, int)), SLOT(updateInterface(int, int, int)));
+    connect(trem6, SIGNAL(updateGUI(int, int, int)), SLOT(updateInterface(int, int, int)));
 
 }
 
@@ -80,6 +81,7 @@ void MainWindow::updateInterface(int id, int x, int y){
 
 MainWindow::~MainWindow()
 {
+    // Encerra a execução das threads no destrutor
     trem1->terminate();
     trem2->terminate();
     trem3->terminate();
