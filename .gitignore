@@ -37,10 +37,6 @@ Thumbs.db
 **/.qmlls.ini
 
 
-*.pro.user*
-*.qbs.user*
-CMakeLists.txt.user*
-
 # xemacs temporary files
 *.flc
 
